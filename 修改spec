@@ -1,0 +1,27 @@
+#添加下面部分
+from PyInstaller.utils.hooks import collect_data_files
+from PyInstaller.utils.hooks import copy_metadata
+ 
+datas = [("你的streamlit安装位置/streamlit/runtime","./streamlit/runtime")]
+datas += collect_data_files("streamlit")
+datas += copy_metadata("streamlit")
+ 
+ 
+block_cipher = None
+ 
+#修改下面a里面的datas为=datas
+a = Analysis(
+    ['run_app.py'],
+    pathex=[],
+    binaries=[],
+    datas=datas,
+    hiddenimports=[],
+    hookspath=['./hooks'],
+    hooksconfig={},
+    runtime_hooks=[],
+    excludes=[],
+    win_no_prefer_redirects=False,
+    win_private_assemblies=False,
+    cipher=block_cipher,
+    noarchive=False,
+)
